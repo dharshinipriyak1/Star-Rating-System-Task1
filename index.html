@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .stars {
+  color: grey; 
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.stars.filled{
+  color: gold; /
+}
+    </style>
+</head>
+<body>
+    <div class="starContainer">
+        <h1>Star Rating</h1>
+        <br>
+        <span  class="stars">★</span>
+        <span class="stars">★</span>
+        <span class="stars">★</span>
+        <span class="stars">★</span>
+        <span  class="stars">★</span>
+        <h3 id="output">Rating is: 0/5</h3>
+    </div> 
+   <script>
+    
+const starContainer = document.getElementById('starContainer');
+const stars = document.querySelectorAll('.stars');
+
+stars.forEach((star, index) => {
+    star.addEventListener('click', (e) => {
+       
+        stars.forEach((s, i) => {
+            if (i <=  index) {
+                s.classList.add('filled'); 
+            
+            } else {
+                s.classList.remove('filled'); 
+            }
+        });
+    starContainer.textContent = index + 1; 
+    });
+});
+   </script>
+</body>
+</html>
