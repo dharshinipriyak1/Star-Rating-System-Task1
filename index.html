@@ -1,59 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        .stars {
-  color: grey; 
-  cursor: pointer;
-  font-size: 2rem;
-}
 
-.stars.filled{
-  color: gold; /
-}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Rating</title>
+    <style>
+        body {
+            background-color: bisque;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .starContainer {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            margin-top: 6%;
+            width: 400px;
+        }
+        h1 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .stars {
+            color: #ccc;
+            cursor: pointer;
+            font-size: 3rem;
+            margin: 5px;
+        }
+        .stars.filled {
+            color: gold;
+        }
+        #output {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #444;
+        }
     </style>
 </head>
-<body>
-    <div class="starContainer">
-        <h1>Star Rating</h1>
-        <br>
-        <span  class="stars">★</span>
-        <span class="stars">★</span>
-        <span class="stars">★</span>
-        <span class="stars">★</span>
-        <span  class="stars">★</span>
-        <h3 id="output">Rating is: 0/5</h3>
-    </div> 
-   <script>
-    
-const starContainer = document.getElementById('starContainer');
-const stars = document.querySelectorAll('.stars');
 
-stars.forEach((star, index) => {
-    star.addEventListener('click', (e) => {
-       
-        stars.forEach((s, i) => {
-            if (i <=  index) {
-                s.classList.add('filled'); 
-            
-            } else {
-                s.classList.remove('filled'); 
-            }
+<body>
+    <div class="starContainer" >
+        <h1>Star Rating</h1>
+            <span class="stars">★</span>
+            <span class="stars">★</span>
+            <span class="stars">★</span>
+            <span class="stars">★</span>
+            <span class="stars">★</span>
+        <h3 id="output">Rating is: 0/5</h3>
+    </div>
+
+    <script>
+        const stars = document.querySelectorAll('.stars');
+        const output = document.getElementById('output');
+
+        stars.forEach((star, index) => {
+            star.addEventListener('click', () => {
+                stars.forEach((s, i) => {
+                    if (i <= index) {
+                        s.classList.add('filled');
+                    } else {
+                        s.classList.remove('filled');
+                    }
+                });
+                output.textContent = `Rating is: ${index + 1}/5`;
+            });
         });
-    starContainer.textContent = index + 1; 
-    });
-});
-   </script>
+    </script>
+
 </body>
+
 </html>
