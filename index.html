@@ -1,78 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Star Rating</title>
-    <style>
-        body {
-            background-color: bisque;
-            font-family: Arial, sans-serif;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .starContainer {
-            background: #fff;
-            padding: 30px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-            margin-top: 6%;
-            width: 400px;
-        }
-        h1 {
-            margin-bottom: 15px;
-            color: #333;
-        }
-        .stars {
-            color: #ccc;
-            cursor: pointer;
-            font-size: 3rem;
-            margin: 5px;
-        }
-        .stars.filled {
-            color: gold;
-        }
-        #output {
-            margin-top: 15px;
-            font-weight: bold;
-            color: #444;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Star Rating</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #f9d976, #f39f86);
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #222;
+      font-size: 2.2rem;
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .stars-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap; 
+      gap: 12px;
+    }
+
+    .stars {
+      color: #ccc;
+      cursor: pointer;
+      font-size: 4rem;
+      transition: transform 0.4s ease, color 0.4s ease;
+    }
+
+    .stars:hover {
+      transform: scale(1.2);
+    }
+
+    .stars.filled {
+      color: gold;
+      animation: fillEffect 0.6s ease;
+      text-shadow: 0 0 15px rgba(255, 223, 0, 0.8),
+                   0 0 25px rgba(255, 215, 0, 0.6);
+    }
+
+    #output {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #333;
+      font-size: 1.4rem;
+      text-align: center;
+      animation: fadeIn 0.8s ease;
+    }
+
+    /* Animations */
+    @keyframes fillEffect {
+      0% { transform: scale(0.5); opacity: 0; color: #ccc; text-shadow: none; }
+      50% { transform: scale(1.6); opacity: 1; color: gold; text-shadow: 0 0 20px rgba(255,223,0,1); }
+      100% { transform: scale(1); color: gold; text-shadow: 0 0 15px rgba(255, 223, 0, 0.8); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.6rem;
+      }
+      .stars {
+        font-size: 2.8rem; 
+      }
+      .stars-container {
+        gap: 8px;
+      }
+      #output {
+        font-size: 1.1rem;
+      }
+      h1 , .stars ,.stars-container , #output{
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
-
 <body>
-    <div class="starContainer" >
-        <h1>Star Rating</h1>
-            <span class="stars">★</span>
-            <span class="stars">★</span>
-            <span class="stars">★</span>
-            <span class="stars">★</span>
-            <span class="stars">★</span>
-        <h3 id="output">Rating is: 0/5</h3>
-    </div>
+  <h1>Star Rating</h1>
+  <div class="stars-container">
+    <span class="stars">★</span>
+    <span class="stars">★</span>
+    <span class="stars">★</span>
+    <span class="stars">★</span>
+    <span class="stars">★</span>
+  </div>
+  <h3 id="output">Rating is: 0/5</h3>
 
-    <script>
-        const stars = document.querySelectorAll('.stars');
-        const output = document.getElementById('output');
+  <script>
+    const stars = document.querySelectorAll('.stars');
+    const output = document.getElementById('output');
 
-        stars.forEach((star, index) => {
-            star.addEventListener('click', () => {
-                stars.forEach((s, i) => {
-                    if (i <= index) {
-                        s.classList.add('filled');
-                    } else {
-                        s.classList.remove('filled');
-                    }
-                });
-                output.textContent = `Rating is: ${index + 1}/5`;
-            });
+    stars.forEach((star, index) => {
+      star.addEventListener('click', () => {
+        stars.forEach((s, i) => {
+          if (i <= index) {
+            s.classList.add('filled');
+          } else {
+            s.classList.remove('filled');
+          }
         });
-    </script>
-
+        output.textContent = `Rating is: ${index + 1}/5`;
+      });
+    });
+  </script>
 </body>
-
 </html>
